@@ -9,6 +9,25 @@ const Login = (props) => {
 
   const navigate = useNavigate()
 
+  const logIn = () => {
+    fetch('http://localhost:3000/parse_body', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ "username":email, "password":password }),
+    })
+      .then((r) => r.json())
+      .then((r) => {
+        window.alert(r.status)
+        if ('passed' === r.status) {
+          window.alert('Correct password')
+        } else {
+          window.alert('Incorrect password')
+        }
+      })
+  }
+
   const onButtonClick = () => {
     // You'll update this function later...
     //navigate("/");
@@ -38,6 +57,7 @@ const Login = (props) => {
     }
 
     // Authentication calls will be made here...
+    logIn()
 
   }
 
